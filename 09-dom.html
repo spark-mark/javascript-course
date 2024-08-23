@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      dom practice!
+    </title>
+  </head>
+  <body>
+    <button>
+      hello
+    </button>
+    <p>
+      sleeper
+    </p>
+    <button class="js-button">
+      another one
+    </button>
+
+    <script>
+      console.log(document.title);
+      console.log(document.body);
+
+      // document.body.innerHTML = 'hello';
+      // document.title = 'poggers omg';
+
+      // note: literally everything is an object breiuh
+      // console.log(document.body.innerHTML);
+
+      // document.body.innerHTML = '<button> chat this is crazy </button>';
+      
+      // we can use the document query selector to take any element from the page and put it in js
+      console.log(document.querySelector('button'));
+      console.log(document.querySelector('.js-button'))
+    </script>
+  </body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      rock paper scissors game v1
+    </title>
+  </head>
+
+  <body>
+    <p>
+      Rock Paper Scissors
+    </p>
+    <button onclick="
+    userChoice = 'Rock'
+    computerChoice = getRandomGesture(3);
+    gamePlay(userChoice, computerChoice);">
+      Rock</button>
+
+    <button onclick="
+    userChoice = 'Paper';
+    computerChoice = getRandomGesture(3);
+    gamePlay(userChoice, computerChoice);">
+      Paper</button>
+
+    <button onclick="
+    userChoice = 'Scissors';
+    computerChoice = getRandomGesture(3);
+    gamePlay(userChoice, computerChoice);">
+      Scissors</button>
+
+    <button onclick="
+      score.wins = 0;
+      score.draws = 0;
+      score.losses = 0;
+      localStorage.removeItem('score');
+      alert('score has been reset')">
+      Reset Score
+    </button>
+
+    
+    <script>
+      let userChoice;
+
+      // JSON.parse returns null if the item is not in local storage.
+      // so we are using a truthy statement here: saying that if NOT existing (!condition), then reset score items to zero.
+      // or we can just use a simple if statemtent. i think i overcooked. 
+      let score = JSON.parse(localStorage.getItem('score')) || {
+        wins: 0,
+        draws: 0,
+        losses: 0
+      };
+      
+      function getRandomGesture(max) {
+        result = Math.floor(Math.random() * max);
+        if (result === 0) 
+          return 'Rock';
+        else if (result === 1)
+          return 'Paper';
+        else
+          return 'Scissors'; 
+      }
+
+      function gamePlay(userChoice, computerChoice) {
+        let result;
+
+        if ((userChoice === 0 && computerChoice === 2) || 
+            (userChoice === 1 && computerChoice === 0) ||
+            (userChoice === 2 && computerChoice === 1)) {
+          result = 'you win!'
+          score.wins+=1;
+        }
+        else if (userChoice === computerChoice) {
+          result = 'it\'s a draw.'
+          score.draws+=1;
+        }
+        else {
+          result = 'you lost.'
+          score.losses+=1;
+        }
+        
+        // saves score object as a JSON file in local storage
+        localStorage.setItem('score', JSON.stringify(score));
+
+        alert(`you played ${userChoice}. the computer played: ${computerChoice}.${result}
+               \n Wins: ${score.wins} Losses: ${score.losses} Draws: ${score.draws}`);
+      }
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      variables practice!
+    </title>
+  </head>
+  <body>
+    
+
+    <script>
+      let variable1 = 3;
+      console.log(variable1);
+
+      variable1 += 1;
+
+      let calculation = 2 + variable1;
+      console.log(calculation);
+
+      // variables types are determined automatically!
+      let message = 'hello';
+      console.log(message);
+
+      // other ways to declare a variable
+      const heldFixed = 2;
+      var variable3 = 3; // only used in old javascript due to some issues (it does not follow scope rules)
+      
+      let condition;
+      // ternary operator (shortcut for an if statement) we can save this result
+      const result = condition ? 'truthy' : 'falsy';
+      console.log(result);
+
+      // guard operator (shortcut for an if statement with one check)
+      const text = condition && 'hello';
+      // eg.
+      text = condition && 'hello'; // results in 'hello' being stored in the variable since 5 is a truthy value
+      // it is a shortcut for this
+      if (condition) {
+        text = 'hello' 
+      }
+
+      // default operator (alsoa shortcut for an if statement to check if true)
+      text = condition || 'hello';
+      // is a shortcut for this
+      if (!condition) {
+        text = 'hello'
+      }
+    </script>
+  </body>
+</html>

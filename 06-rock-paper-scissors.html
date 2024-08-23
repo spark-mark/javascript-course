@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      rock paper scissors game v1
+    </title>
+  </head>
+  <body>
+    <p>
+      Rock Paper Scissors
+    </p>
+    <button onclick="
+    userChoice = 0
+    randomNum = getRandomInt(3);
+    checkWin(userChoice, randomNum);">
+      Rock</button>
+
+    <button onclick="
+    userChoice = 1;
+    randomNum = getRandomInt(3);
+    checkWin(userChoice, randomNum);">
+      Paper</button>
+
+    <button onclick="
+    userChoice = 2;
+    randomNum = getRandomInt(3);
+    checkWin(userChoice, randomNum);">
+      Scissors</button>
+
+    
+    <script>
+      let userChoice = 4;
+      let randomNum = getRandomInt(3);
+      
+      function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+      }
+
+      function checkWin(userChoice, computerChoice) {
+        let result;
+        let userChoiceString;
+        let computerChoiceString;
+
+        if ((userChoice === 0 && computerChoice === 2) || 
+            (userChoice === 1 && computerChoice === 0) ||
+            (userChoice === 2 && computerChoice === 1)) {
+          result = 'you win!'
+        }
+        else if (userChoice === computerChoice) {
+          result = 'it\'s a draw.'
+        }
+        else {
+          result = 'you lost.'
+        }
+
+        if (userChoice === 0) {
+          userChoiceString = 'rock';
+        }
+        else if (userChoice === 1) {
+          userChoiceString = 'paper'
+        }
+        else {
+          userChoiceString = 'scissors'
+        }
+
+        if (computerChoice === 0) {
+          computerChoiceString = 'rock';
+        }
+        else if (computerChoice === 1) {
+          computerChoiceString = 'paper'
+        }
+        else {
+          computerChoiceString = 'scissors'
+        }
+        
+        alert(`you played ${userChoiceString}. the computer played: ${computerChoiceString}.${result}`);
+      }
+
+    </script>
+  </body>
+</html>

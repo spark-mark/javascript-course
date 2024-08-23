@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      objects practice!
+    </title>
+  </head>
+  <body>
+    
+
+    <script>
+      // basically a struct
+      // use the dot operator to access objects inside the struct.
+      const product = {
+        name: 'socks',
+        price: 1090,
+      }
+      
+      console.log(product);
+      console.log(product.name);
+      console.log(product.price);
+
+      product.name = 'cotton-socks';
+      console.log(product.name);
+
+      //we can create new properties OUTSIDE of the declaration like this
+      product.newProperty = true;
+      console.log(product);
+
+      // we can also delete an object we created using
+      delete product.newProperty;
+      console.log(product);
+
+
+
+
+      const product2 = {
+        name: 'shirt',
+        ['delivery-time']: '1 day',
+        
+        // we can also have functions as a member 
+        fun: function function1() {
+          console.log('function output');
+        }
+      }
+
+      console.log(product2);
+      console.log(product2.name);
+
+      // bracket notation lets us use properties that don't work with dot notation
+      console.log(product2['name']);
+
+      // console.log(product2.delivery-time) // will give an error because of the dash
+      // console.log(['delivery-time'])
+
+      // calling the function (a method)
+      product2.fun();
+
+      // this converts a object (exluding functions) into a string (js -> JSON)
+      JSON.stringify(product2); 
+
+      // this converts from a json to js object(JSON -> js)
+      const jsonString = JSON.stringify(product2);
+      JSON.parse(jsonString);
+
+
+      // properties and methods of other objects (auto-boxing)
+      console.log('hello'.length);
+      console.log('hello'.toUpperCase());
+
+      const object1 = {
+        message: 'hello'
+      }
+
+      const object2 = object1;
+    </script>
+  </body>
+</html>
