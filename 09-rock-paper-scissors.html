@@ -28,18 +28,19 @@
     gamePlay(userChoice, computerChoice);">
       Scissors</button>
 
+    <p class="js-result"></p>
+    <p class="js-moves"></p>
+    <p class="js-score"></p>
+
     <button onclick="
-      score.wins = 0;
-      score.draws = 0;
-      score.losses = 0;
-      localStorage.removeItem('score');
-      alert('score has been reset')">
+      resetScore();">
       Reset Score
     </button>
 
     
     <script>
       let userChoice;
+      let result;
 
       // JSON.parse returns null if the item is not in local storage.
       // so we are using a truthy statement here: saying that if NOT existing (!condition), then reset score items to zero.
@@ -49,42 +50,75 @@
         draws: 0,
         losses: 0
       };
+
+      updateScoreElement();
       
       function getRandomGesture(max) {
-        result = Math.floor(Math.random() * max);
-        if (result === 0) 
+        choice = Math.floor(Math.random() * max);
+        if (choice === 0) 
           return 'Rock';
-        else if (result === 1)
+        else if (choice === 1)
           return 'Paper';
         else
           return 'Scissors'; 
       }
 
       function gamePlay(userChoice, computerChoice) {
-        let result;
+        console.log(computerChoice);
+        console.log(userChoice);
 
-        if ((userChoice === 0 && computerChoice === 2) || 
-            (userChoice === 1 && computerChoice === 0) ||
-            (userChoice === 2 && computerChoice === 1)) {
-          result = 'you win!'
+        // determine the winner and add to the scores
+        if ((userChoice === 'Rock' && computerChoice === 'Scissors') || 
+            (userChoice === 'Paper' && computerChoice === 'Rock') ||
+            (userChoice === 'Scissors' && computerChoice === 'Paper')) {
+          result = 'You won!'
           score.wins+=1;
         }
         else if (userChoice === computerChoice) {
-          result = 'it\'s a draw.'
+          result = 'It\'s a draw.'
           score.draws+=1;
         }
         else {
-          result = 'you lost.'
+          result = 'You lost.'
           score.losses+=1;
         }
+
+        // changing the html paragraph everytime score is updated
+        updateScoreElement();
         
+        // instead of an alert, we now update the html on the page instead.
+        updateMovesElement();
+        updateResultElement();
+
         // saves score object as a JSON file in local storage
         localStorage.setItem('score', JSON.stringify(score));
-
-        alert(`you played ${userChoice}. the computer played: ${computerChoice}.${result}
-               \n Wins: ${score.wins} Losses: ${score.losses} Draws: ${score.draws}`);
       }
 
+      function updateScoreElement() {
+        document.querySelector('.js-score').innerHTML = 
+          `Wins: ${score.wins} Losses: ${score.losses} Draws: ${score.draws}`;
+      }
+
+      function updateMovesElement() {
+        document.querySelector('.js-moves').innerHTML = 
+          `You played: ${userChoice}. The computer played: ${computerChoice}.`;
+      }
+
+      function updateResultElement() {
+        document.querySelector('.js-result').innerHTML =
+          `${result}`;
+      }
+
+      function resetScore() {
+        score.wins = 0;
+        score.draws = 0;
+        score.losses = 0;
+        result = '';
+
+        localStorage.removeItem('score');
+        updateScoreElement();
+        alert('The score has been reset.')
+      }
     </script>
   </body>
 </html>
